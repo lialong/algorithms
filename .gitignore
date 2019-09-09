@@ -1,0 +1,15 @@
+.project
+.settings
+.classpath
+.idea
+target
+*.iml
+*.ipr
+*.iws
+deploy.sh
+*.war
+war
+*.bak
+logs
+src/test/java/com/autonavi/boss/order/partner/.DS_Store
+.DS_Store
