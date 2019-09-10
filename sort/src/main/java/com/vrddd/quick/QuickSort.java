@@ -41,13 +41,10 @@ public class QuickSort {
                 while(j > i && arr[j] > key) {
                     j--;
                 }
-                if (i < j){
-                    if(arr[i] == arr[j]){
-                        i++;
-                    }else{
-                        swap(arr,i,j);
-                    }
+                if (arr[i] == arr[j] && i < j){
+                    i++;
                 }
+                swap(arr,i,j);
             }
             sort(arr,start,i);
             sort(arr,i+1,end);
