@@ -5,6 +5,7 @@ import java.util.Arrays;
 /**
  * 选择排序
  * 让一组数从小到大排列
+ * 最坏判断 n*(n-1)/2 次，交换 (n-1) 次，但多用了一个变量记录
  */
 public class SelectionSort {
     /**

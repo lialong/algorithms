@@ -2,6 +2,11 @@ package com.vrddd.insertion;
 
 import java.util.Arrays;
 
+/**
+ * 插入排序
+ * 让数组升序排列
+ * 最多判断 n*(n-1)/2 次，交换 n*(n-1)/2 次，还多出一个变量记录
+ */
 public class InsertionSort {
     /**
      * 待排序数组

@@ -6,6 +6,7 @@ import java.util.Arrays;
  * 冒泡排序，交换排序
  * 为了将无序的一组数，变为有序。
  * 变升序。
+ * 最坏判断 n*(n-1)/2 次，交换 n*(n-1)/2 次
  */
 public class BubbleSort {
     /**
