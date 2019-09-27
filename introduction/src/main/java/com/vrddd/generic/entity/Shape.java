@@ -8,4 +8,9 @@ public abstract class Shape implements Comparable<Shape>{
     public int compareTo(Shape o) {
         return (int)(this.getArea() - o.getArea());
     }
+
+    @Override
+    public String toString(){
+        return getArea() + "";
+    }
 }
