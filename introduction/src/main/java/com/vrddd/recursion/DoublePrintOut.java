@@ -8,7 +8,7 @@ public class DoublePrintOut {
 
     private static void printOut(int i){
         if (i/10 > 0){
-            printOut(i/10);;
+            printOut(i/10);
         }
         printDigit(i%10);
     }
@@ -24,6 +24,10 @@ public class DoublePrintOut {
     }
 
     private static void printDouble(double a){
+        if (a < 0){
+            a = -a;
+            System.out.print("-");
+        }
         int b = (int)a;
         printOut(b);
         System.out.print(".");
@@ -32,7 +36,7 @@ public class DoublePrintOut {
     }
 
     public static void main(String[] args) {
-        printDouble(123.746d);
+        printDouble(-123.746d);
     }
 
 }
