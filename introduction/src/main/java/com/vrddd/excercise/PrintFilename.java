@@ -1,4 +1,4 @@
-package com.vrddd.recursion;
+package com.vrddd.excercise;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

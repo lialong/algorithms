@@ -1,4 +1,4 @@
-package com.vrddd;
+package com.vrddd.excercise;
 
 /**
  * 字谜游戏求解
