@@ -6,24 +6,26 @@ public class PrintPermute {
         permute(str.toCharArray(), 0, str.length() - 1);
     }
 
+    private static void swap(char[] str, int idx1, int idx2){
+        char tmp = str[idx1];
+        str[idx1] = str[idx2];
+        str[idx2] = tmp;
+    }
+
     private static void permute(char[] str, int low, int high){
         if (low < high){
             for (int i = low; i <= high; i++) {
-                if (str[i] != str[low] && i != low){
-                    char tmp = str[i];
-                    str[i] = str[low];
-                    str[low] = tmp;
-                }
-                if(low == 0 || i != low){
-                    System.out.println(new String(str));
-                }
-                if (str[i] != str[low] && i != low){
-                    char tmp = str[i];
-                    str[i] = str[low];
-                    str[low] = tmp;
+                boolean flag = str[i] != str[low] && i != low;
+                if (flag){
+                    swap(str, i, low);
                 }
                 permute(str, low+1, high);
+                if (flag){
+                    swap(str, i, low);
+                }
             }
+        }else{
+            System.out.println(new String(str));
         }
     }
 
