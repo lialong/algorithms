@@ -12,6 +12,7 @@
     <module>sort</module>
     <module>data-structure</module>
       <module>introduction</module>
+      <module>analysis</module>
   </modules>
 
   <name>algorithms</name>
