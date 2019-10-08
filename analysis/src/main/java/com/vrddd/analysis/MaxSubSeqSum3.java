@@ -7,7 +7,7 @@ public class MaxSubSeqSum3 {
             int mid = (start + end) / 2;
             int left = getSum(arr, start, mid);
             int right = getSum(arr, mid + 1, end);
-            int midSum = getLeftMax(arr,mid) + getRightMax(arr,mid);
+            int midSum = getLeftMax(arr, mid, start) + getRightMax(arr, mid, end);
             if (left >= right && left >= midSum){
                 return left;
             }else if(right >= left && right >= midSum){
@@ -16,16 +16,16 @@ public class MaxSubSeqSum3 {
                 return midSum;
             }
         }else if (start == end){
-            return arr[start];
+            return arr[start] > 0 ? arr[start] : 0;
         }else {
             return 0;
         }
     }
 
-    private static int getLeftMax(int[] arr,int mid){
+    private static int getLeftMax(int[] arr, int mid, int start){
         int maxSum = 0;
         int sum = 0;
-        for (int i = mid; i >= 0; i--) {
+        for (int i = mid; i >= start; i--) {
             sum += arr[i];
             if (sum > maxSum){
                 maxSum = sum;
@@ -34,11 +34,10 @@ public class MaxSubSeqSum3 {
         return maxSum;
     }
 
-    private static int getRightMax(int[] arr,int mid){
+    private static int getRightMax(int[] arr, int mid, int end){
         int maxSum = 0;
         int sum = 0;
-        int length = arr.length;
-        for (int i = mid + 1; i < length; i++) {
+        for (int i = mid + 1; i <= end; i++) {
             sum += arr[i];
             if (sum > maxSum){
                 maxSum = sum;
