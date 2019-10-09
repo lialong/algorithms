@@ -1,4 +1,4 @@
-package com.vrddd.analysis;
+package com.vrddd.analysis.maxsum;
 
 public class MaxSubSeqSum4 {
 
