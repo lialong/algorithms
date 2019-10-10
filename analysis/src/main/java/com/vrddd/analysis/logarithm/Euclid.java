@@ -11,4 +11,8 @@ public class Euclid {
         return m;
     }
 
+    public static void main(String[] args) {
+        System.out.println(gcd(50, 15));
+    }
+
 }
