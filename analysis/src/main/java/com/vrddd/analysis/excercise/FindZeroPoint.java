@@ -9,8 +9,8 @@ public class FindZeroPoint {
         double lowVal = function.apply(low);
         double highVal = function.apply(mid);
         double midVal = function.apply(mid);
-        boolean add = lowVal < 0 && high > 0;
-        boolean sub = lowVal > 0 && high < 0;
+        boolean add = lowVal < 0 && highVal > 0;
+        boolean sub = lowVal > 0 && highVal < 0;
         if (add || sub){
             if(midVal == 0){
                 return mid;
