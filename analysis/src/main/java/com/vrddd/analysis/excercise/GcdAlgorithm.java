@@ -1,5 +1,7 @@
 package com.vrddd.analysis.excercise;
-
+/**
+ * 2.16
+ */
 public class GcdAlgorithm {
 
     private static int gcd(int m, int n){
@@ -10,5 +12,7 @@ public class GcdAlgorithm {
         }
         return n;
     }
+
+
 
 }
