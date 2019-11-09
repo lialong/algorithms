@@ -12,8 +12,9 @@ public class Eratosthenes {
         }
         double num = Math.sqrt(n);
         for (int i = 2; i <= num ; i++) {
-            for (int j = 2; j*i <= n; j++) {
-                arr[j*i] = 0;
+            int m,j;
+            for (j = 2, m = j * i; m <= n; j++) {
+                arr[m] = 0;
             }
         }
         for (int i = 2; i <= n; i++) {
@@ -24,7 +25,7 @@ public class Eratosthenes {
     }
 
     public static void main(String[] args) {
-        find(55);
+        find(2);
     }
 
 }
