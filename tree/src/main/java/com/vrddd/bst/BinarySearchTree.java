@@ -3,16 +3,6 @@ package com.vrddd.bst;
 import java.util.Comparator;
 
 public class BinarySearchTree<T> {
-    private static class Node<T>{
-        T value;
-        Node left;
-        Node right;
-
-        Node(T value){
-            this.value = value;
-        }
-    }
-
     private Node root;
 
     private Comparator<T> comparator;
@@ -21,6 +11,16 @@ public class BinarySearchTree<T> {
 
     public BinarySearchTree(Comparator<T> comparator){
         this.comparator = comparator;
+    }
+
+    private static class Node<T>{
+        T value;
+        Node left;
+        Node right;
+
+        Node(T value){
+            this.value = value;
+        }
     }
 
     public int compare(T t1, T t2){
