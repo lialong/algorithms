@@ -109,11 +109,9 @@ public class BinarySearchTree<T> {
             if (root.left == null && root.right == null){
                 return null;
             }else if (root.left != null && root.right == null){
-                Node left = root.left;
-                return left;
+                return root.left;
             }else if (root.left == null && root.right != null){
-                Node right = root.right;
-                return right;
+                return root.right;
             }else {
                 T value = findMin(root.right);
                 root.value = value;
