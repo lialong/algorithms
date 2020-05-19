@@ -47,13 +47,13 @@ public class AVLTree<T> {
             return null;
         }
         if (height(root.left) - height(root.right) > DIFFER){
-            if (height(root.left.left) - height(root.left.right) > DIFFER){
+            if (height(root.left.left) > height(root.left.right)){
                 root = rotateWithLeftChild(root);
             }else {
                 root = doubleWithLeftChild(root);
             }
         }else if(height(root.right) - height(root.left) > DIFFER){
-            if (height(root.right.right) - height(root.right.left) > DIFFER){
+            if (height(root.right.right) > height(root.right.left)){
                 root = rotateWithRightChild(root);
             }else {
                 root = doubleWithRightChild(root);
@@ -85,5 +85,25 @@ public class AVLTree<T> {
     private AVLNode<T> doubleWithRightChild(AVLNode<T> k3){
         k3.right = rotateWithLeftChild(k3.right);
         return rotateWithRightChild(k3);
+    }
+    public void print(){
+        print(root, 0);
+    }
+    private void print(AVLNode<T> root, int num){
+        if (root != null){
+            printSpace(num);
+            System.out.println(root.value);
+        }
+        if (root.right != null){
+            print(root.right,num + 1);
+        }
+        if (root.left != null){
+            print(root.left, num + 1);
+        }
+    }
+    private void printSpace(int num){
+        for (int i = 0; i < num; i++) {
+            System.out.print(" ");
+        }
     }
 }
