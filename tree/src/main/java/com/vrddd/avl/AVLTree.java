@@ -62,6 +62,43 @@ public class AVLTree<T> {
         root.height = Math.max(height(root.left), height(root.right)) + 1;
         return root;
     }
+    public void remove(T t){
+        root = remove(t, root);
+    }
+    private AVLNode<T> remove(T t, AVLNode<T> root){
+        if (root == null){
+            return null;
+        }
+        int compare = compareTo(t, root.value);
+        if (compare < 0) {
+            root.left = remove(t, root.left);
+        }else if (compare > 0){
+            root.right = remove(t, root.right);
+        }else {
+            if (root.left == null && root.right == null){
+
+            }else if (root.left != null && root.right != null){
+                root.value = findMax(root.right);
+                root.right = remove(root.value, root.right);
+            }else {
+                root = root.left == null ? root.right : root.left;
+            }
+        }
+        return balance(root);
+    }
+    public T findMax(){
+        return findMax(root);
+    }
+    private T findMax(AVLNode<T> root){
+        if (root == null){
+            return null;
+        }
+        if (root.right == null){
+            return root.value;
+        }else {
+            return findMax(root.right);
+        }
+    }
     private AVLNode<T> rotateWithLeftChild(AVLNode<T> k2){
         AVLNode<T> k1 = k2.left;
         k2.left = k1.right;
