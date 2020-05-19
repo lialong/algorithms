@@ -47,13 +47,13 @@ public class AVLTree<T> {
             return null;
         }
         if (height(root.left) - height(root.right) > DIFFER){
-            if (height(root.left.left) > height(root.left.right)){
+            if (height(root.left.left) >= height(root.left.right)){
                 root = rotateWithLeftChild(root);
             }else {
                 root = doubleWithLeftChild(root);
             }
         }else if(height(root.right) - height(root.left) > DIFFER){
-            if (height(root.right.right) > height(root.right.left)){
+            if (height(root.right.right) >= height(root.right.left)){
                 root = rotateWithRightChild(root);
             }else {
                 root = doubleWithRightChild(root);
