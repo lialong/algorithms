@@ -1,5 +1,8 @@
 package com.vrddd.introduction.excercise;
 
+/**
+ * 练习三：打印double类型变量
+ */
 public class DoublePrintOut {
 
     private static void printDigit(int i){
