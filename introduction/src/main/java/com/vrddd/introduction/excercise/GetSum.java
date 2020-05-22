@@ -1,5 +1,8 @@
 package com.vrddd.introduction.excercise;
 
+/**
+ * 练习8：数列求和
+ */
 public class GetSum {
 
     private static double get(int i){

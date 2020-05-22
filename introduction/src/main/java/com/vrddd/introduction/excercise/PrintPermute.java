@@ -1,5 +1,8 @@
 package com.vrddd.introduction.excercise;
 
+/**
+ * 练习6：对一个字符串进行全排列打印
+ */
 public class PrintPermute {
 
     private static void permute(String str){
