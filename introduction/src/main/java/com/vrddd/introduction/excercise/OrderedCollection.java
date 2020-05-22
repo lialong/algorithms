@@ -2,6 +2,9 @@ package com.vrddd.introduction.excercise;
 
 import java.util.Arrays;
 
+/**
+ * 练习14：一个有序集合
+ */
 public class OrderedCollection <T>{
 
     private Comparable<T>[] arr;

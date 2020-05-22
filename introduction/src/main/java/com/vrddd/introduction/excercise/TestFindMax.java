@@ -5,6 +5,9 @@ import com.vrddd.introduction.generic.FindMaxDemo2;
 
 import java.util.Comparator;
 
+/**
+ * 练习15：找出多个Rectangle中周长、面积最大的
+ */
 public class TestFindMax {
 
     static Comparator<Rectangle> compArea = (x,y) -> {

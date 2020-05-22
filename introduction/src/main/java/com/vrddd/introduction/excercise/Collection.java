@@ -2,6 +2,9 @@ package com.vrddd.introduction.excercise;
 
 import java.util.Arrays;
 
+/**
+ * 练习13：一个数组实现的集合
+ */
 public class Collection {
 
     private Object[] arr;
