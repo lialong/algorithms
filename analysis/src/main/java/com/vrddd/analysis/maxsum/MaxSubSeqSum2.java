@@ -1,5 +1,8 @@
 package com.vrddd.analysis.maxsum;
 
+/**
+ * 算法复杂度为大O N的2次方
+ */
 public class MaxSubSeqSum2 {
     private static int getSum(int[] arr){
         int length = arr.length;

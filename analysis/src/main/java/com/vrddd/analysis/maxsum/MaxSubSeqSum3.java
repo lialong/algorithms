@@ -1,5 +1,8 @@
 package com.vrddd.analysis.maxsum;
 
+/**
+ * 算法复杂度为大O N*logN
+ */
 public class MaxSubSeqSum3 {
 
     private static int getSum(int[] arr, int start, int end){
