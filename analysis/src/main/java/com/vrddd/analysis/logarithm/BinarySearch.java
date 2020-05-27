@@ -1,5 +1,8 @@
 package com.vrddd.analysis.logarithm;
 
+/**
+ * 二分查找法，算法复杂度为logN
+ */
 public class BinarySearch {
 
     private static int search(int[] arr, int start, int end, int num){

@@ -1,5 +1,8 @@
 package com.vrddd.analysis.maxsum;
 
+/**
+ * 时间复杂度为N，非常理想的算法
+ */
 public class MaxSubSeqSum4 {
 
     private static int getSum(int[] arr){
