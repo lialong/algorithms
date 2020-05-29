@@ -1,5 +1,8 @@
 package com.vrddd.analysis.logarithm;
 
+/**
+ * 求某个数的n次方
+ */
 public class Exponentiation {
 
     private static int pow(int m, int n){
