@@ -1,20 +1,21 @@
 package com.vrddd.analysis.excercise;
 
+/**
+ * 练习1.17
+ * 暴力求解最小正数和子序列
+ */
 public class MinPosSubSeqSum {
 
     private static int getSum(int[] arr){
         int length = arr.length;
-        int sum = 0, minSum = 0;
+        int minSum = Integer.MAX_VALUE;
         for (int i = 0; i < length; i++) {
-            if (arr[i] > 0){
+            int sum = 0;
+            for (int j = i; j < length; j++) {
                 sum += arr[i];
-                if (minSum == 0){
-                    minSum = sum;
-                }else if(sum < minSum){
+                if (sum > 0 && sum < minSum) {
                     minSum = sum;
                 }
-            }else{
-                sum = 0;
             }
         }
         return minSum;

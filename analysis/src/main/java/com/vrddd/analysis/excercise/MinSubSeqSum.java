@@ -1,5 +1,9 @@
 package com.vrddd.analysis.excercise;
 
+/**
+ * 练习2.17
+ * 求最小子序列
+ */
 public class MinSubSeqSum {
 
     private static int getSum(int[] arr){

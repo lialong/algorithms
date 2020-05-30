@@ -2,7 +2,7 @@ package com.vrddd.analysis.excercise;
 
 /**
  * 习题：2.14
- *
+ * 算法复杂度为 N
  * @author lizelong
  * @date 2020/5/29
  */

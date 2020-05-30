@@ -1,5 +1,9 @@
 package com.vrddd.analysis.excercise;
 
+/**
+ * 练习2.17
+ * 乘积最大的子序列
+ */
 public class MaxSubSeqProduct {
 
     private static int getProduct(int[] arr){
