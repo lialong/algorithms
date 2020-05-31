@@ -1,5 +1,9 @@
 package com.vrddd.analysis.excercise;
 
+/**
+ * 练习2.20
+ * 判断某个数是否时素数
+ */
 public class DeterminePrime {
 
     private static boolean isPrime(int num){

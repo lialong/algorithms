@@ -1,5 +1,9 @@
 package com.vrddd.analysis.excercise;
 
+/**
+ * 练习2.23
+ * 不用递归求幂的程序
+ */
 public class Exponentiation {
 
     private static int[] getArray(int num, int pow){
@@ -13,9 +17,9 @@ public class Exponentiation {
     }
 
     public static void main(String[] args) {
-        int num = 2;
-        int pow = 12;
-        String binaryStr = Integer.toBinaryString(12);
+        int num = 3;
+        int pow = 4;
+        String binaryStr = Integer.toBinaryString(pow);
         System.out.println(binaryStr);
         int[] arr = getArray(num, pow);
         int length = binaryStr.length() - 1;

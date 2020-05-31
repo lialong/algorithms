@@ -5,6 +5,10 @@ import com.vrddd.analysis.excercise.entity.Sequence;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 练习2.19
+ * 找出子序列最大和及这个子序列
+ */
 public class MaxSubSeqSum5 {
 
     private static Sequence getMaxSequence(int[] arr){

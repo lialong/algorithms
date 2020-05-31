@@ -3,7 +3,7 @@ package com.vrddd.analysis.excercise;
 import java.util.function.Function;
 
 /**
- * 练习1.18
+ * 练习2.18
  * 找函数零点
  */
 public class FindZeroPoint {
