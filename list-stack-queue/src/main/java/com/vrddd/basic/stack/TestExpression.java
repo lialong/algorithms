@@ -30,19 +30,17 @@ public class TestExpression {
             if ("+".equals(c) || "-".equals(c) || "*".equals(c) || "/".equals(c)){
                 double num1 = Double.valueOf(stack.pop());
                 double num2 = Double.valueOf(stack.pop());
+                double re;
                 if ("+".equals(c)){
-                    double re = num2 + num1;
-                    stack.push(re + "");
+                    re = num2 + num1;
                 }else if ("-".equals(c)){
-                    double re = num2 - num1;
-                    stack.push(re + "");
+                    re = num2 - num1;
                 }else if ("*".equals(c)){
-                    double re = num2 * num1;
-                    stack.push(re + "");
+                    re = num2 * num1;
                 }else {
-                    double re = num2 / num1;
-                    stack.push(re + "");
+                    re = num2 / num1;
                 }
+                stack.push(re + "");
             }else {
                 stack.push(c);
             }
@@ -58,6 +56,11 @@ public class TestExpression {
         System.out.println(1);
     }
 
+    /**
+     * 将中缀表达式转为后缀表达式
+     * @param arr
+     * @return
+     */
     private static String[] midToSuffix(String[] arr) {
         Stack<String> stack = new Stack<>();
         StringBuilder sb = new StringBuilder();
