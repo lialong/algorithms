@@ -55,6 +55,10 @@ public class MyArrayList<T> {
         return old;
     }
 
+     public void trimToSize(){
+        ensureCapacity(size());
+     }
+
     /**
      * 这里用的是private class即内部类，而不是private static class
      */
