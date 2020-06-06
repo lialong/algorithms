@@ -1,4 +1,4 @@
-package com.vrddd.basic.stack;
+package com.vrddd.adt.stack;
 
 import java.util.Stack;
 

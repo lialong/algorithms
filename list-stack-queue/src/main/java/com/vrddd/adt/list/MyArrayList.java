@@ -1,4 +1,4 @@
-package com.vrddd.basic.list;
+package com.vrddd.adt.list;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
