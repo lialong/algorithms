@@ -7,11 +7,21 @@ import java.util.NoSuchElementException;
  * @author lizelong
  * @date 2020/6/2
  */
-public class MyArrayList<T> {
+public class MyArrayList<T> implements Iterable<T>{
 
     private T[] items;
 
     private int size;
+
+    private static int DEFAULT_SIZE = 10;
+
+    public MyArrayList(){
+        this(DEFAULT_SIZE);
+    }
+
+    public MyArrayList(int initSize){
+        items = (T[])new Object[initSize];
+    }
 
     private int size(){
         return this.size;
@@ -29,6 +39,7 @@ public class MyArrayList<T> {
             items[i] = items[i-1];
         }
         items[idx] = item;
+        this.size++;
         return item;
     }
 
@@ -59,6 +70,10 @@ public class MyArrayList<T> {
         ensureCapacity(size());
      }
 
+     @Override
+     public Iterator<T> iterator(){
+        return new MyArrayListIterator<>();
+     }
     /**
      * 这里用的是private class即内部类，而不是private static class
      */
