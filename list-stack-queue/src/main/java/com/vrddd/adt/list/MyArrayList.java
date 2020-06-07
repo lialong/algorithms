@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * @author lizelong
  * @date 2020/6/2
  */
-public class MyArrayList<T> implements Iterable<T>{
+public class MyArrayList<T> implements Iterable<T> {
 
     private T[] items;
 
@@ -15,47 +15,54 @@ public class MyArrayList<T> implements Iterable<T>{
 
     private static int DEFAULT_SIZE = 10;
 
-    public MyArrayList(){
+    public MyArrayList() {
         this(DEFAULT_SIZE);
     }
 
-    public MyArrayList(int initSize){
-        items = (T[])new Object[initSize];
+    public MyArrayList(int initSize) {
+        items = (T[]) new Object[initSize];
     }
 
-    private int size(){
+    public int size() {
         return this.size;
     }
 
-    public T add(T item){
+    public T get(int idx) {
+        if (idx >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return items[idx];
+    }
+
+    public T add(T item) {
         return add(size(), item);
     }
 
-    public T add(int idx, T item){
-        if (size() == items.length){
+    public T add(int idx, T item) {
+        if (size() == items.length) {
             ensureCapacity(2 * size() + 1);
         }
-        for (int i = size() + 1; i > idx ; i--) {
-            items[i] = items[i-1];
+        for (int i = size(); i > idx; i--) {
+            items[i] = items[i - 1];
         }
         items[idx] = item;
         this.size++;
         return item;
     }
 
-    private void ensureCapacity(int newSize){
-        if (newSize < size()){
+    private void ensureCapacity(int newSize) {
+        if (newSize < size()) {
             return;
         }
         T[] oldArr = items;
-        T[] items = (T[])new Object[newSize];
-        for (int i = 0; i < oldArr.length; i++) {
+        T[] items = (T[]) new Object[newSize];
+        for (int i = 0; i < size(); i++) {
             items[i] = oldArr[i];
         }
     }
 
-    public T remove(int idx){
-        if (idx >= size()){
+    public T remove(int idx) {
+        if (idx >= size()) {
             throw new IndexOutOfBoundsException();
         }
         T old = items[idx];
@@ -66,14 +73,23 @@ public class MyArrayList<T> implements Iterable<T>{
         return old;
     }
 
-     public void trimToSize(){
+    public void trimToSize() {
         ensureCapacity(size());
-     }
+    }
 
-     @Override
-     public Iterator<T> iterator(){
+    public void printList() {
+        Iterator<T> iterator = iterator();
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next() + ",");
+        }
+        System.out.println();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
         return new MyArrayListIterator<>();
-     }
+    }
+
     /**
      * 这里用的是private class即内部类，而不是private static class
      */
@@ -83,7 +99,7 @@ public class MyArrayList<T> implements Iterable<T>{
 
         @Override
         public boolean hasNext() {
-            if (current <= size()){
+            if (current < size()) {
                 return true;
             }
             return false;
@@ -91,14 +107,14 @@ public class MyArrayList<T> implements Iterable<T>{
 
         @Override
         public T next() {
-            if (!hasNext()){
+            if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            return (T)(items[current++]);
+            return (T) (items[current++]);
         }
 
         @Override
-        public void remove(){
+        public void remove() {
             MyArrayList.this.remove(current);
         }
     }

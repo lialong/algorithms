@@ -1,5 +1,9 @@
 package com.vrddd.adt.exercise;
 
+/**
+ * 双链表元素交换
+ * 单链表元素交换
+ */
 public class Exercise2 {
 
     private static class SingleLink<T> {
