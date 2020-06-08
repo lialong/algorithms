@@ -34,6 +34,15 @@ public class MyArrayList<T> implements Iterable<T> {
         return items[idx];
     }
 
+    public int get(T item){
+        for (int i = 0; i < size(); i++) {
+            if (items[i].equals(item)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public T add(T item) {
         return add(size(), item);
     }
@@ -88,6 +97,20 @@ public class MyArrayList<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new MyArrayListIterator<>();
+    }
+
+    public void addAll(Iterable<? extends T> items){
+        Iterator<? extends T> iterator = items.iterator();
+        while(iterator.hasNext()){
+            add(iterator.next());
+        }
+    }
+
+    public void removeAll(Iterable<? extends T> items){
+        Iterator<? extends T> iterator = items.iterator();
+        while(iterator.hasNext()){
+            remove(get(iterator.next()));
+        }
     }
 
     /**
