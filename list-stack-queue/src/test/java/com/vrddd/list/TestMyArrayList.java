@@ -24,9 +24,9 @@ public class TestMyArrayList {
         }
         System.out.println("\nlist在移除第三个元素后：");
         list.remove(2);
+        size = list.size();
         System.out.println("list 尺寸为：" + size);
         System.out.print("list 包含的元素：");
-        size = list.size();
         for (int i = 0; i < size; i++) {
             System.out.print(list.get(i) + "\t");
         }
