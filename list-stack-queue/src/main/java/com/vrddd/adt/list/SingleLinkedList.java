@@ -54,6 +54,7 @@ public class SingleLinkedList<T>{
         if (!contains(x)){
             Node<T> first = beginMarker.next;
             beginMarker.next = new Node<>(x, first);
+            this.size++;
             return true;
         }
         return false;
@@ -65,6 +66,7 @@ public class SingleLinkedList<T>{
         while(node != null){
             if (node.value.equals(x)){
                 pre.next = node.next;
+                this.size--;
                 return true;
             }
             pre = node;
