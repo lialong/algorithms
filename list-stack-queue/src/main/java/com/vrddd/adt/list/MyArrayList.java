@@ -1,6 +1,7 @@
 package com.vrddd.adt.list;
 
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -25,6 +26,13 @@ public class MyArrayList<T> implements Iterable<T> {
 
     public int size() {
         return this.size;
+    }
+
+    public void set(int idx, T value){
+        if (idx < 0 || idx >= size()){
+            throw new NoSuchElementException();
+        }
+        items[idx] = value;
     }
 
     public T get(int idx) {
@@ -96,7 +104,7 @@ public class MyArrayList<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new MyArrayListIterator<>();
+        return new MyArrayListIterator();
     }
 
     public void addAll(Iterable<? extends T> items){
@@ -116,7 +124,7 @@ public class MyArrayList<T> implements Iterable<T> {
     /**
      * 这里用的是private class即内部类，而不是private static class
      */
-    private class MyArrayListIterator<T> implements Iterator<T> {
+    private class MyArrayListIterator implements Iterator<T> {
 
         private int current = 0;
 
@@ -133,12 +141,78 @@ public class MyArrayList<T> implements Iterable<T> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            return (T) (items[current++]);
+            return items[current++];
         }
 
         @Override
         public void remove() {
             MyArrayList.this.remove(current);
+        }
+    }
+
+    public ListIterator<T> listIterator(){
+        return new MyArrayListIterator2();
+    }
+
+    private class MyArrayListIterator2 implements ListIterator<T> {
+        private int current;
+        private boolean backwards = false;
+
+        @Override
+        public boolean hasNext() {
+            return current < size();
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()){
+                throw new IndexOutOfBoundsException();
+            }
+            backwards = false;
+            return items[current++];
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return current > 0 && current < size();
+        }
+
+        @Override
+        public T previous() {
+            if (!hasPrevious()){
+                throw new IndexOutOfBoundsException();
+            }
+            backwards = true;
+            return items[--current];
+        }
+
+        @Override
+        public int nextIndex() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public int previousIndex() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void remove() {
+            if (backwards){
+                MyArrayList.this.remove(current--);
+            }else {
+                MyArrayList.this.remove(--current);
+            }
+        }
+
+        @Override
+        public void set(T t) {
+            MyArrayList.this.set(current, t);
+        }
+
+        @Override
+        public void add(T t) {
+            MyArrayList.this.add(current++, t);
         }
     }
 }
