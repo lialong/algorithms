@@ -114,13 +114,6 @@ public class MyArrayList<T> implements Iterable<T> {
         }
     }
 
-    public void removeAll(Iterable<? extends T> items){
-        Iterator<? extends T> iterator = items.iterator();
-        while(iterator.hasNext()){
-            remove(get(iterator.next()));
-        }
-    }
-
     /**
      * 这里用的是private class即内部类，而不是private static class
      */

@@ -119,6 +119,25 @@ public class MyLinkedList<T> implements Iterable<T>{
         this.modCount++;
     }
 
+    private boolean remove(T val){
+        Iterator<T> iterator = iterator();
+        while(iterator.hasNext()){
+            if (val.equals(iterator.next())){
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeAll(Iterable<? extends T> items){
+        Iterator<? extends T> iterator = items.iterator();
+        while(iterator.hasNext()){
+            T val = iterator.next();
+            remove(val);
+        }
+    }
+
     public boolean contains(T t){
         Iterator<T> iterator = iterator();
         while(iterator.hasNext()){
