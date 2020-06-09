@@ -2,6 +2,7 @@ package com.vrddd.adt.list;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 /**
  * @author lizelong
@@ -17,6 +18,10 @@ public class MyLinkedList<T> implements Iterable<T>{
     @Override
     public Iterator<T> iterator() {
         return new MyLinkedListIterator();
+    }
+
+    public ListIterator<T> listIterator(){
+        return new MyLinkedListIterator2();
     }
 
     private class MyLinkedListIterator implements Iterator<T>{
@@ -54,6 +59,96 @@ public class MyLinkedList<T> implements Iterable<T>{
             MyLinkedList.this.remove(current.pre);
             expectedModCount++;
             rmFlag = false;
+        }
+    }
+
+    private class MyLinkedListIterator2 implements ListIterator<T>{
+        private Node<T> current = beginMarker.next;
+        private int expectedModCount = modCount;
+        private boolean backwards = false;
+        @Override
+        public boolean hasNext() {
+            if (expectedModCount != modCount){
+                throw new ConcurrentModificationException();
+            }
+            return current != endMarker;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()){
+                throw new IndexOutOfBoundsException();
+            }
+            if (expectedModCount != modCount){
+                throw new ConcurrentModificationException();
+            }
+            backwards = false;
+            T val = current.value;
+            current = current.next;
+            return val;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            if (expectedModCount != modCount){
+                throw new ConcurrentModificationException();
+            }
+            backwards = true;
+            return current.pre != beginMarker;
+        }
+
+        @Override
+        public T previous() {
+            if (!hasPrevious()){
+                throw new IndexOutOfBoundsException();
+            }
+            if (expectedModCount != modCount){
+                throw new ConcurrentModificationException();
+            }
+            current = current.pre;
+            return current.value;
+        }
+
+        @Override
+        public int nextIndex() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public int previousIndex() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void remove() {
+            if (expectedModCount != modCount){
+                throw new ConcurrentModificationException();
+            }
+            if (!backwards){
+                MyLinkedList.this.remove(current.pre);
+                expectedModCount++;
+            }else {
+                MyLinkedList.this.remove(current);
+                current = current.pre;
+                expectedModCount++;
+            }
+        }
+
+        @Override
+        public void set(T t) {
+            if (expectedModCount != modCount){
+                throw new ConcurrentModificationException();
+            }
+            current.value = t;
+        }
+
+        @Override
+        public void add(T t) {
+            if (expectedModCount != modCount){
+                throw new ConcurrentModificationException();
+            }
+            expectedModCount++;
+            addBefore(current, t);
         }
     }
 
