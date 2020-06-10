@@ -290,4 +290,28 @@ public class MyLinkedList<T> implements Iterable<T>{
             iterator.remove();
         }
     }
+
+    public void addFirst(T t){
+        add(0, t);
+    }
+
+    public void addLast(T t){
+        add(t);
+    }
+
+    public void removeFirst(){
+        remove(0);
+    }
+
+    public void removeLast(){
+        remove(size()-1);
+    }
+
+    public T getFirst(){
+        return getNode(0).value;
+    }
+
+    public T getLast(){
+        return getNode(size - 1).value;
+    }
 }
