@@ -1,5 +1,6 @@
 package com.vrddd.adt.list;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -13,6 +14,8 @@ public class MyArrayList<T> implements Iterable<T> {
     private T[] items;
 
     private int size;
+
+    private int modCount;
 
     private static int DEFAULT_SIZE = 10;
 
@@ -64,6 +67,7 @@ public class MyArrayList<T> implements Iterable<T> {
         }
         items[idx] = item;
         this.size++;
+        this.modCount++;
         return item;
     }
 
@@ -87,6 +91,7 @@ public class MyArrayList<T> implements Iterable<T> {
             items[i] = items[i + 1];
         }
         this.size--;
+        this.modCount++;
         return old;
     }
 
@@ -118,28 +123,37 @@ public class MyArrayList<T> implements Iterable<T> {
      * 这里用的是private class即内部类，而不是private static class
      */
     private class MyArrayListIterator implements Iterator<T> {
-
-        private int current = 0;
+        int current;
+        int expectedModCount = modCount;
+        int lastRet = -1;
 
         @Override
         public boolean hasNext() {
-            if (current < size()) {
-                return true;
-            }
-            return false;
+            return current != size();
         }
 
         @Override
         public T next() {
+            checkModified();
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
+            lastRet = current;
             return items[current++];
         }
 
         @Override
         public void remove() {
-            MyArrayList.this.remove(current);
+            checkModified();
+            MyArrayList.this.remove(lastRet);
+            lastRet = -1;
+            expectedModCount++;
+        }
+
+        protected void checkModified(){
+            if (expectedModCount != modCount){
+                throw new ConcurrentModificationException();
+            }
         }
     }
 
@@ -147,36 +161,19 @@ public class MyArrayList<T> implements Iterable<T> {
         return new MyArrayListIterator2();
     }
 
-    private class MyArrayListIterator2 implements ListIterator<T> {
-        private int current;
-        private boolean backwards = false;
-
-        @Override
-        public boolean hasNext() {
-            return current < size();
-        }
-
-        @Override
-        public T next() {
-            if (!hasNext()){
-                throw new IndexOutOfBoundsException();
-            }
-            backwards = false;
-            return items[current++];
-        }
-
+    private class MyArrayListIterator2 extends MyArrayListIterator implements ListIterator<T> {
         @Override
         public boolean hasPrevious() {
-            return current > 0 && current < size();
+            return current > 0;
         }
 
         @Override
         public T previous() {
+            checkModified();
             if (!hasPrevious()){
                 throw new IndexOutOfBoundsException();
             }
-            backwards = true;
-            return items[--current];
+            return items[lastRet = --current];
         }
 
         @Override
@@ -190,36 +187,46 @@ public class MyArrayList<T> implements Iterable<T> {
         }
 
         @Override
-        public void remove() {
-            if (backwards){
-                MyArrayList.this.remove(current--);
-            }else {
-                MyArrayList.this.remove(--current);
-            }
-        }
-
-        @Override
         public void set(T t) {
-            MyArrayList.this.set(current, t);
+            checkModified();
+            MyArrayList.this.set(lastRet, t);
         }
 
         @Override
         public void add(T t) {
+            checkModified();
             MyArrayList.this.add(current++, t);
+            lastRet = -1;
+            expectedModCount++;
         }
+    }
+
+    public Iterator<T> reverseIterator(){
+        return new ArrayListReverseIterator();
     }
 
     private class ArrayListReverseIterator implements Iterator<T>{
         private int current = size() - 1;
+        private int expectedModCount = modCount;
+
+        private void checkModified(){
+            if (expectedModCount != modCount){
+                throw new ConcurrentModificationException();
+            }
+        }
 
         @Override
         public boolean hasNext() {
-            return false;
+            return current > -1;
         }
 
         @Override
         public T next() {
-            return null;
+            checkModified();
+            if (!hasNext()){
+                throw new IndexOutOfBoundsException();
+            }
+            return items[current--];
         }
     }
 }
