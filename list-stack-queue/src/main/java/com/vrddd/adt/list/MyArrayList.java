@@ -102,16 +102,16 @@ public class MyArrayList<T> implements Iterable<T> {
         System.out.println();
     }
 
-    @Override
-    public Iterator<T> iterator() {
-        return new MyArrayListIterator();
-    }
-
     public void addAll(Iterable<? extends T> items){
         Iterator<? extends T> iterator = items.iterator();
         while(iterator.hasNext()){
             add(iterator.next());
         }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new MyArrayListIterator();
     }
 
     /**
@@ -206,6 +206,20 @@ public class MyArrayList<T> implements Iterable<T> {
         @Override
         public void add(T t) {
             MyArrayList.this.add(current++, t);
+        }
+    }
+
+    private class ArrayListReverseIterator implements Iterator<T>{
+        private int current = size() - 1;
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public T next() {
+            return null;
         }
     }
 }

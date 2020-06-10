@@ -66,6 +66,8 @@ public class MyLinkedList<T> implements Iterable<T>{
         private Node<T> current = beginMarker.next;
         private int expectedModCount = modCount;
         private boolean backwards = false;
+        private boolean okToRemove = false;
+
         @Override
         public boolean hasNext() {
             if (expectedModCount != modCount){
@@ -82,9 +84,10 @@ public class MyLinkedList<T> implements Iterable<T>{
             if (expectedModCount != modCount){
                 throw new ConcurrentModificationException();
             }
-            backwards = false;
             T val = current.value;
             current = current.next;
+            backwards = false;
+            okToRemove = true;
             return val;
         }
 
@@ -106,6 +109,8 @@ public class MyLinkedList<T> implements Iterable<T>{
                 throw new ConcurrentModificationException();
             }
             current = current.pre;
+            backwards = true;
+            okToRemove = true;
             return current.value;
         }
 
@@ -147,6 +152,7 @@ public class MyLinkedList<T> implements Iterable<T>{
             if (expectedModCount != modCount){
                 throw new ConcurrentModificationException();
             }
+            okToRemove = false;
             expectedModCount++;
             addBefore(current, t);
         }
@@ -276,4 +282,12 @@ public class MyLinkedList<T> implements Iterable<T>{
         }
     }
 
+    public static <T> void splice(Iterator<T> itr, MyLinkedList<? extends T> lst){
+        ListIterator<T> listIterator = (ListIterator<T>)itr;
+        Iterator<T> iterator = (Iterator<T>) lst.iterator();
+        while (iterator.hasNext()){
+            listIterator.add(iterator.next());
+            iterator.remove();
+        }
+    }
 }
