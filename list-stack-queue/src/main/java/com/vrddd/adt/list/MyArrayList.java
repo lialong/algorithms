@@ -76,7 +76,7 @@ public class MyArrayList<T> implements Iterable<T> {
             return;
         }
         T[] oldArr = items;
-        T[] items = (T[]) new Object[newSize];
+        items = (T[]) new Object[newSize];
         for (int i = 0; i < size(); i++) {
             items[i] = oldArr[i];
         }
