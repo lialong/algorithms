@@ -41,11 +41,7 @@ public class TestBalanceSymbol {
                 }
             }
         }
-        if (stack.isEmpty()){
-            return true;
-        }else {
-            return false;
-        }
+        return stack.empty();
     }
 
     public static void main(String[] args) {
